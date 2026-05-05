@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Vertical</title>
+
+<style>
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: Arial;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    max-width: 90%;
+}
+
+/* 🔠 TEXTE */
+#message {
+    font-size: clamp(28px, 5vw, 60px);
+    font-weight: bold;
+    white-space: pre-line;
+    background: linear-gradient(90deg, #a8edea, #fed6e3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ✍️ CURSEUR */
+.cursor {
+    display: inline-block;
+    width: 3px;
+    height: 40px;
+    background: white;
+    margin-left: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%,100% {opacity:1;}
+    50% {opacity:0;}
+}
+
+/* ❓ QUESTION */
+.question {
+    margin-top: 40px;
+    font-size: 22px;
+}
+
+button {
+    margin: 10px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.yes { background: #a8edea; }
+.no { background: #ff9a9e; }
+
+#reponse {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="message"></div>
+    <span class="cursor" id="cursor"></span>
+
+    <div class="question">
+        Mbega uranezerewe? 😊
+    </div>
+
+    <button class="yes" onclick="repondre(true)">Oui</button>
+    <button class="no" onclick="repondre(false)">Non</button>
+
+    <div id="reponse"></div>
+
+</div>
+
+<script>
+
+const texte = "IMANA\nYARANDEMYE\nDATA NA MAMA\nBANGIRA UMUNTU";
+
+let i = 0;
+
+function ecrire() {
+    if (i < texte.length) {
+        document.getElementById("message").innerHTML += texte.charAt(i);
+        i++;
+        setTimeout(ecrire, 70);
+    } else {
+        // 🚫 STOP CURSEUR ICI
+        document.getElementById("cursor").style.display = "none";
+    }
+}
+
+function repondre(rep) {
+    const div = document.getElementById("reponse");
+
+    if (rep) {
+        div.innerHTML = "😊 Ni vyiza cane! Gumana umunezero!";
+    } else {
+        div.innerHTML = "💙 Humura, ibintu bizogenda neza!";
+    }
+}
+
+ecrire();
+
+</script>
+
+</body>
+</html>
